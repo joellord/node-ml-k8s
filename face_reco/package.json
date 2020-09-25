@@ -1,0 +1,18 @@
+{
+  "name": "face_reco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "face_reco.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^1.7.4",
+    "canvas": "^2.6.1",
+    "face-api.js": "^0.22.2"
+  }
+}

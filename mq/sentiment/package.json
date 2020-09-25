@@ -1,0 +1,17 @@
+{
+  "name": "mq-sentiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "Joel Lord <joelphy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.6.0",
+    "sentiment": "^5.0.2"
+  }
+}
