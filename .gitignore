@@ -1,5 +1,8 @@
 node_modules
+.vscode
 keys.json
 *.jpg
 *.png
 *.jpeg
+*.JPG
+*.gif
