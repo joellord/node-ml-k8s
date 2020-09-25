@@ -2,3 +2,4 @@ node_modules
 keys.json
 *.jpg
 *.png
+*.jpeg
