@@ -11,6 +11,12 @@
   "author": "Joel Lord <joelphy@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "amqplib": "^0.6.0"
+    "@tensorflow/tfjs": "^1.7.4",
+    "@tensorflow/tfjs-node": "^1.7.4",
+    "amqplib": "^0.6.0",
+    "canvas": "^2.6.1",
+    "face-api.js": "^0.22.2",
+    "node-fetch": "^2.6.1",
+    "sharp": "^0.26.1"
   }
 }

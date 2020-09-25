@@ -16,7 +16,7 @@ const STD_SIZE = 500;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const MODELS_PATH = `${__dirname}/weights`;
+const MODELS_PATH = `${__dirname}/../ml-models`;
 
 console.log("Loading models");
 await faceapi.nets.ssdMobilenetv1.loadFromDisk(MODELS_PATH);

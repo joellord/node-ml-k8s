@@ -51,7 +51,7 @@ const fetchAllFollowers = async () => {
     followers.push(...result.users);
     rateLimiterCount++;
   }
-  while(false) //result.next_cursor_str != "0")
+  while(result.next_cursor_str != "0")
 
   return followers;
 }
@@ -87,14 +87,3 @@ const newFollower = follower => {
   console.log(`Sending new follower ${follower.screen_name} to Transformer`);
   sendChannel.sendToQueue(sendQueue, Buffer.from(JSON.stringify(follower)), { persistent: false });
 };
-
-// For each follower
-//  Send to transformer
-//  
-
-// Monitor new followers
-//  Send to transformer
-
-// Monitor tweets from followers
-//  Send to sentiment analyser
-//  Send to db for update
