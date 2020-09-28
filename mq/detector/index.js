@@ -14,6 +14,8 @@ const RABBITMQ_URI = process.env.RABBITMQ_URI || "amqp://localhost";
 const initQueue = "detector.faces.init";
 const fetchInitQueue = "db.follower.facedata";
 const detectQueue = "detector.faces.detect";
+const newFaceQueue = "detector.face.add";
+
 const STD_SIZE = 500;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,6 +32,8 @@ await faceapi.nets.faceRecognitionNet.loadFromDisk(MODELS_PATH);
 
 let labeledFaceDescriptors;
 
+let ready = false;
+
 console.log(`Connecting to RabbitMQ with URI ${RABBITMQ_URI}`);
 
 let connection = await amqp.connect(RABBITMQ_URI);
@@ -43,17 +47,41 @@ channel.assertQueue(initQueue);
 channel.consume(initQueue, msg => {
   console.log("Received face data for initial detector");
   let faceData = JSON.parse(msg.content.toString());
-  labeledFaceDescriptors = faceData.map(desc => {
-    let arr = new Float32Array(Object.values(desc.faceDescriptors[0]));
-    return new faceapi.LabeledFaceDescriptors(desc.handle, [new Float32Array(arr)]);
-  });
+  labeledFaceDescriptors = [];
+  for (let i = 0; i < faceData.length; i++) {
+    let desc = faceData[i];
+    for (let j = 0; j < desc.faceDescriptors.length; j++) {
+      if (!desc.faceDescriptors[j]) continue;
+      let arr = new Float32Array(Object.values(desc.faceDescriptors[j]));
+      labeledFaceDescriptors.push(new faceapi.LabeledFaceDescriptors(`${desc.handle} (${desc.score})`, [new Float32Array(arr)]));
+    }
+  }
 
   console.log("Ready to match faces");
+  ready = true;
+  channel.ack(msg);
+});
+
+channel.assertQueue(newFaceQueue, {durable: false});
+channel.consume(newFaceQueue, async msg => {
+  let follower = JSON.parse(msg.content.toString());
+  console.log(`Received face data for ${follower.handle}`);
+
+  let arr = new Float32Array(Object.values(follower.faceDescriptor));
+  labeledFaceDescriptors.push(new faceapi.LabeledFaceDescriptors(`${desc.handle}`, [new Float32Array(arr)]));
+
   channel.ack(msg);
 });
 
 channel.assertQueue(detectQueue, {durable: false});
 channel.consume(detectQueue, async msg => {
+  if (!ready) {
+    console.log(`Service is not ready, delaying this message for 5 seconds.`);
+    let content = JSON.parse(msg.content.toString());
+    channel.sendToQueue(detectQueue, Buffer.from(JSON.stringify(content)), {"x-delay": 5000});
+    channel.ack(msg);
+    return;
+  }
   let content = JSON.parse(msg.content.toString());
   console.log(`Face detection requested for ${content.url}`);
 
@@ -89,7 +117,7 @@ channel.consume(detectQueue, async msg => {
 
   results.forEach((bestMatch, i) => {
     const box = fullFaceDescriptions[i].detection.box;
-    const text = bestMatch.toString();
+    const text = bestMatch.label;
     const drawBox = new faceapi.draw.DrawBox(box, { label: text });
     drawBox.draw(canvas);
   });

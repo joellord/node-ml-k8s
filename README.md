@@ -8,3 +8,9 @@ Pitfalls:
 * full_sample works, not follower_recognition
 
 Third step: Create microservices
+Additional training data
+
+Issues
+* Adding a new face (training) does not update the detector
+* Using a label {handle} ({score}) doesn't work if I add a new detector. Need a way to fetch the score independently of the label
+* Detector is "stuck" with the last request

@@ -12,7 +12,8 @@ const FollowerSchema = {
     tweetCount: Number,
     averageComparative: Number
   },
-  faceDescriptors: Array
+  faceDescriptors: Array,
+  score: Number
 }
 
 const Follower = mongoose.model("Follower", FollowerSchema);

@@ -36,6 +36,10 @@ channel.consume(newFollowerQueue, async msg => {
   let oldFollower = await Follower.findOneAndUpdate(filter, content, options);
   let newFollower = await Follower.findOne(filter);
 
+  if (oldFollower === null) {
+    channel.sendToQueue("score.follower.rate", Buffer.from(JSON.stringify(newFollower)), { persistent: false });
+  }
+
   if (oldFollower === null || oldFollower.lastProfilePic !== newFollower.lastProfilePic) {
     console.log("Found a new profile pic, need to update");
     channel.sendToQueue("faceprocessor.picture.descriptors", Buffer.from(JSON.stringify(newFollower)), { persistent: false });
@@ -43,6 +47,7 @@ channel.consume(newFollowerQueue, async msg => {
 
   if (newFollower.status && (oldFollower === null || oldFollower.status !== newFollower.status)) {
     channel.sendToQueue("sentiment.status.analyze", Buffer.from(JSON.stringify(newFollower)), { persistent: false });
+    channel.sendToQueue("score.follower.rate", Buffer.from(JSON.stringify(newFollower)), { persistent: false });
   }
 
   console.log(`Follower added to DB`);
@@ -54,8 +59,9 @@ await channel.assertQueue(faceDataQueue);
 channel.prefetch(1);
 channel.consume(faceDataQueue, async msg => {
   console.log(`Face data has been requested. Will be sent to ${msg.properties.replyTo}`);
-  let followers = await Follower.find({"faceDescriptors.1": {$exists: true}}, "handle faceDescriptors");
+  let followers = await Follower.find({"faceDescriptors.1": {$exists: true}}, "handle faceDescriptors score");
   channel.sendToQueue(msg.properties.replyTo, Buffer.from(JSON.stringify(followers)));
+  channel.ack(msg);
 });
 
 const newFaceQueue = "db.follower.train";
