@@ -1,0 +1,19 @@
+{
+  "name": "twitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joel Lord <joelphy@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@joellord/pause": "^1.0.2",
+    "amqplib": "^0.6.0",
+    "dotenv": "^8.2.0",
+    "twit": "^2.2.11"
+  }
+}

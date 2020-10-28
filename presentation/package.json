@@ -1,0 +1,44 @@
+{
+  "name": "presentation",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@sambego/diorama": "^1.1.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "express-ws": "^4.0.0",
+    "face-api.js": "^0.22.2",
+    "node-pty": "^0.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3",
+    "sentiment": "^5.0.2",
+    "twit": "^2.2.11",
+    "xterm": "^4.9.0",
+    "xterm-addon-attach": "^0.6.0",
+    "xterm-addon-fit": "^0.4.0"
+  },
+  "scripts": {
+    "start": "concurrently \"react-scripts start\" \"nodemon -w ./index.js .\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:8080"
+}
