@@ -34,6 +34,11 @@ export default class Twitter extends Component {
     this.setState({tweets});
   }
 
+  refreshFollowers() {
+    let refreshUrl = `http://${window.location.hostname}${port}/refreshstream`;
+    fetch(refreshUrl);
+  }
+
   render() {
     let style = {
       pic: {
@@ -51,6 +56,13 @@ export default class Twitter extends Component {
         paddingLeft: "20px",
         fontSize: "1em",
         fontWeight: "bold"
+      },
+      button: {
+        color: "rgba(0, 0, 0, 0.1)",
+        border: "0",
+        position: "absolute",
+        right: "20px",
+        bottom: "50px"
       }
     }
 
@@ -92,6 +104,7 @@ export default class Twitter extends Component {
             })}
           </tbody>
         </table>
+        <button style={style.button} onClick={this.refreshFollowers}>Refresh Followers</button>
       </div>
     );
   }

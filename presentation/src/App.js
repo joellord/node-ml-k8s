@@ -31,9 +31,9 @@ const SHOW_NOTES = true;
 
 const talkProps = {
   title: "NodeJS, ML, K8s and Unethical Facial Recognition",
-  conference: "iJS - Munich",
-  conferenceHashTag: "#ijs",
-  date: "Oct 28, 2020",
+  conference: "ITPalooza 3D",
+  conferenceHashTag: "#itpalooza",
+  date: "Mar 24, 2021",
   moreInfoUrl: "http://ezurl.to/unethical"
 }
 
@@ -78,7 +78,7 @@ function App() {
         npm install --save twitter
       </CodeSlide>
 
-      <CodeSlide title="Twitter" lang="javascript">
+      {/* <CodeSlide title="Twitter" lang="javascript">
         {`
 let twitterClient = new Twitter(keys);
 twitterClient.get("followers/list", (err, result) => {
@@ -92,7 +92,7 @@ twitterClient.get("followers/list", (err, result) => {
   return;
 });
       `}
-      </CodeSlide>
+      </CodeSlide> */}
 
       <CodeSlide title="Twitter">
         {`
@@ -177,7 +177,7 @@ import faceapi from "face-api.js";
         `}
       </CodeSlide>
 
-      <CodeSlide title="face-api.js">
+      {/* <CodeSlide title="face-api.js">
         {`
     let reader = new FileReader();
     reader.onload = function(event){
@@ -189,7 +189,7 @@ import faceapi from "face-api.js";
     }
     reader.readAsDataURL(props.file);     
         `}
-      </CodeSlide>
+      </CodeSlide> */}
 
       <CodeSlide title="face-api.js">
         {`
@@ -223,7 +223,7 @@ faceapi.env.monkeyPatch({ Canvas, Image, ImageData });
       `}
       </CodeSlide>
 
-      <CodeSlide title="face-api.js on NodeJS">
+      {/* <CodeSlide title="face-api.js on NodeJS">
         {`
 let trainingImage = TRAINING_IMAGE_PATH;
 const input = await nodeCanvas.loadImage(trainingImage);
@@ -231,7 +231,7 @@ let fullFaceDescriptions = await faceapi
     .detectAllFaces(input)
     .withFaceLandmarks();
         `}
-      </CodeSlide>
+      </CodeSlide> */}
 
       <Slide>
         <Title>What about recognition?</Title>
@@ -341,13 +341,8 @@ score = sentiment.analyze("Something negative.");
       </Slide>
 
       <Slide>
-        <Subtitle>FullStack Day - Containers @ iJS</Subtitle>
+        <Subtitle>Containerization For Software Developers</Subtitle>
         <Text>Learn everything you need to know about Containers</Text>
-      </Slide>
-
-      <Slide>
-        <Subtitle>FullStack Day - Containers @ iJS</Subtitle>
-        <Text>Two days ago at 13:45</Text>
       </Slide>
 
       <Slide>
@@ -360,7 +355,7 @@ score = sentiment.analyze("Something negative.");
         <Text>It [...] is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.</Text>
       </Slide>
 
-      <Slide>
+      {/* <Slide>
         <Title>Containers</Title>
         <Text>It is a disposable unit. Once it's completed, it destroys itself along with all other dependencies.</Text>
       </Slide>
@@ -402,7 +397,7 @@ docker built -t joellord/node-ml-k8s-facedetection .
 
 docker push docker.io/joellord/node-ml-k8s-facedetection
         `}
-      </CodeSlide>
+      </CodeSlide> */}
 
       <ImageWithTitle title="Messaging" img={ImgPassNotes} />
 
@@ -421,10 +416,10 @@ docker push docker.io/joellord/node-ml-k8s-facedetection
         <Image src={ImgMQWork} />
       </Slide>
 
-      <Slide>
+      {/* <Slide>
         <Subtitle>Request/Reply Pattern (RPC)</Subtitle>
         <Image src={ImgMQRPC} />
-      </Slide>
+      </Slide> */}
       
       <CodeSlide title="Simple Pub/Sub - Publisher">
         {`
@@ -472,13 +467,8 @@ amqp.connect('amqp://localhost', function(err, connection) {
       <ImageWithTitle title="Deploy All The Things" img={ImgMaestro} />
 
       <Slide>
-        <Subtitle>Kubernetes Kitchen @ iJS</Subtitle>
+        <Subtitle>Kubernetes Kitchen</Subtitle>
         <Text>Learn everything you need to know about Kubernetes</Text>
-      </Slide>
-
-      <Slide>
-        <Subtitle>Kubernetes Kitchen @ iJS</Subtitle>
-        <Text>Yesterday at 14:00</Text>
       </Slide>
 
       <Slide>
@@ -504,7 +494,7 @@ amqp.connect('amqp://localhost', function(err, connection) {
         </List>
       </Slide>
       
-      <CodeSlide title="Kubernetes Deployment" lang="yaml">
+      {/* <CodeSlide title="Kubernetes Deployment" lang="yaml">
         {`
 apiVersion: apps/v1
 kind: Deployment
@@ -583,7 +573,7 @@ amqp.connect('amqp://rabbitmq', (err, connection) => {
   // ...
 });            
         `}
-      </CodeSlide>
+      </CodeSlide> */}
 
       <ImageWithTitle img={ImgOpenShift} />
 

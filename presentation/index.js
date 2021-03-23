@@ -6,6 +6,7 @@ const os = require("os");
 const exec = require("child_process").exec;
 let Twit = require("twit");
 let keys = require("./keys.json");
+let cors = require("cors");
 
 const Sentiment = require("sentiment");
 const sentiment = new Sentiment();
@@ -13,11 +14,13 @@ const sentiment = new Sentiment();
 let t = new Twit(keys);
 
 const app = express();
+app.use(cors());
 const ws = expressWs(app);
 const twitterWs = expressWs(app);
 
 const PORT = process.env.PORT || 8080;
-const VERBOSE = process.env.VERBOSE;
+// const VERBOSE = process.env.VERBOSE;
+const VERBOSE = true;
 
 const DEFAULT_PATH = "../";
 
@@ -34,6 +37,12 @@ app.use(express.static(path.join(__dirname, "./build")));
 
 app.get("/health", (req, res) => {
   res.send("Feeling good").status(200);
+});
+
+app.get("/refreshstream", (req, res) => {
+  console.log("Refresh stream with new followers");
+  streamStart();
+  res.send("all good").status(200);
 });
 
 ws.app.ws("/shell", (ws, req) => {
@@ -56,37 +65,44 @@ twitterWs.app.ws("/twitter", (ws, req) => {
   twitterFeedWebsocket = ws;
 });
 
-t.get("followers/ids", {}, (err, data, resp) => {
-  if (err) {
-    console.log(err);
-    process.exit();
+let stream;
+let ids; 
+function processTweet(tweet) {
+  let isFollower = false;
+  if (ids.indexOf(tweet.user.id) > -1) isFollower = true;
+  let user = tweet.user.screen_name;
+  let text = tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text;
+
+  let score = sentiment.analyze(text);
+
+  if (VERBOSE) console.log(`@${user}: ${text}\n=-=-=-=-=-=-=`);
+
+  try {
+    twitterFeedWebsocket.send(JSON.stringify({
+      handle: user,
+      pic: tweet.user.profile_image_url,
+      tweet: text,
+      score: score.comparative
+    }));
+  } catch(e) {
+    console.error("Could not send to websocket");
   }
-  console.log(`Fetched ${data.ids.length} follower ids`);
-  let ids = data.ids;
-  let stream = t.stream('statuses/filter', { follow: ids.join(",") })
-
-  stream.on('tweet', function (tweet) {
-    let isFollower = false;
-    if (ids.indexOf(tweet.user.id) > -1) isFollower = true;
-    let user = tweet.user.screen_name;
-    let text = tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text;
-
-    let score = sentiment.analyze(text);
-
-    if (VERBOSE) console.log(`@${user}: ${text}\n=-=-=-=-=-=-=`);
-
-    try {
-      twitterFeedWebsocket.send(JSON.stringify({
-        handle: user,
-        pic: tweet.user.profile_image_url,
-        tweet: text,
-        score: score.comparative
-      }));
-    } catch(e) {
-      console.error("Could not send to websocket");
+}
+const streamStart = () => {
+  if (stream && stream.stop) stream.stop();
+  t.get("followers/ids", {}, (err, data, resp) => {
+    if (err) {
+      console.log(err);
+      process.exit();
     }
-  });  
-});
+    console.log(`Fetched ${data.ids.length} follower ids`);
+    ids = data.ids;
+    stream = t.stream('statuses/filter', { follow: ids.join(",") })
+
+    stream.on('tweet', processTweet);
+  });
+};
+streamStart();
 
 app.get("/system", (req, res) => {
   api().then(snap => res.send(snap).status(200));
