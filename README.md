@@ -1,21 +1,29 @@
-First step: scrape all the profile images from my followers
+# NodeJS, ML, K8s and Unethical Face Recognition
+Presentation and Code Samples for my talk.
 
-Second step: Recognize a face in an image
-Pitfalls:
-* use tfjs-node @1.7 instead of the latest (2.x)
-* use sharp 0.24 (https://github.com/lovell/sharp/issues/2062)
-* Fix images
-* full_sample works, not follower_recognition
+## Presentation
+Once you cloned the repo, you can 
 
-Third step: Create microservices
-Additional training data
+```
+cd presentation
+npm start
+```
 
-Issues
-* Adding a new face (training) does not update the detector
-* Using a label {handle} ({score}) doesn't work if I add a new detector. Need a way to fetch the score independently of the label
-* Detector is "stuck" with the last request
+## Demo
+Using podman (you might need to use a --network flag with Docker).
 
-Todo
+You will also need concurrently installed (`npm install -g concurrently`)
+
+```
+cd demo
+./servers.sh
+./services.sh
+```
+
+## Todo
+
+There is still a lot of work to do on the demo application, here is a list so I don't forget about it.
+
 * Score should have it's own service
 * Update DB with each tweet from a follower
 * UI for Trainer
