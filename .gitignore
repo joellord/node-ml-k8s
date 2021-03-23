@@ -1,11 +1,11 @@
 node_modules
 .vscode
 keys.json
-*.jpg
-*.png
-*.jpeg
-*.JPG
-*.gif
+demo/**/*.jpg
+demo/**/*.png
+demo/**/*.jpeg
+demo/**/*.JPG
+demo/**/*.gif
 training.txt
 Dockerfile
 Containerfile
