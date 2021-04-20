@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { Deck, Slide, Title, Subtitle, Text, Browser, List, Image, Footer } from "@sambego/diorama";
+import { Deck, Slide, Title, Subtitle, Text, Browser, List, Link, Image, Footer } from "@sambego/diorama";
 import ImageWithTitle from "./components/ImageWithTitle";
 import CodeSlide from "./components/CodeSlide";
 import Twitter from "./slides/Twitter";
@@ -13,6 +13,8 @@ import ThankYou from "./slides/ThankYou";
 import ImgRating from "./assets/ratings.jpg";
 import ImgEvilApp from "./assets/evil-app.jpg";
 import ImgPublicData from "./assets/public-data.jpg";
+import ImgWarning from "./assets/warning.jpg";
+import ImgStop from "./assets/stop.jpg";
 import ImgTabarnak from "./assets/tabarnak.gif";
 import ImgMicroservices from "./assets/microservices.jpg";
 import ImgMachineLearning from "./assets/machine-learning.jpg";
@@ -22,6 +24,7 @@ import ImgPassNotes from "./assets/passnotes.jpg";
 import ImgMQSimple from "./assets/mq-simple.png";
 import ImgMQWork from "./assets/mq-work-queue.png";
 import ImgMQRPC from "./assets/mq-rpc.png";
+import ImgStorage from "./assets/storage.jpg";
 import ImgMaestro from "./assets/maestro.jpg";
 import ImgOpenShift from "./assets/openshift.png";
 import ImgDemo from "./assets/demo.jpg";
@@ -31,9 +34,9 @@ const SHOW_NOTES = true;
 
 const talkProps = {
   title: "NodeJS, ML, K8s and Unethical Facial Recognition",
-  conference: "ITPalooza 3D",
-  conferenceHashTag: "#itpalooza",
-  date: "Mar 24, 2021",
+  conference: "CodeMotion",
+  conferenceHashTag: "#CodeMotion",
+  date: "Apr 20, 2021",
   moreInfoUrl: "http://ezurl.to/unethical"
 }
 
@@ -46,7 +49,7 @@ function App() {
       <ImageWithTitle 
         title="NodeJS, ML, K8s and Unethical Face Recognition" 
         img={ ImgRating } 
-        notes="I spend a lot of time at conferences. It is part of my job. As a matter of fact, this would've been my fourth year in a row in Munich. Hopefully, it will resume soon. You know how at conferences, you meet a lot of different people. Sometimes you will get great conversations out of it, sometimes not as much. I spend a lot of time at conferences networking in the hallway or at booths and I wondered, is there a way to make this whole thing more efficient. So I thought, what if I could build an application that would rate people so I know who I should speak to at events and who I should avoid? That would be great, right? Well, before you start thinking bad things of me, please take all of this talk with a grain of salt. I would never rate people like I'm about to do, that would be... well... unethical. If you ever see me in the hallway, drop by and say hi, I'm always open to conversations. Still, I built this application just for fun to see how I could explore various technologies to make it work. This is what I will present today."
+        notes="."
         />
 
       <About />
@@ -78,7 +81,7 @@ function App() {
         npm install --save twitter
       </CodeSlide>
 
-      {/* <CodeSlide title="Twitter" lang="javascript">
+      <CodeSlide title="Twitter" lang="javascript">
         {`
 let twitterClient = new Twitter(keys);
 twitterClient.get("followers/list", (err, result) => {
@@ -92,7 +95,7 @@ twitterClient.get("followers/list", (err, result) => {
   return;
 });
       `}
-      </CodeSlide> */}
+      </CodeSlide>
 
       <CodeSlide title="Twitter">
         {`
@@ -115,8 +118,22 @@ t.get("followers/ids", {}, (err, data, resp) => {
         <Twitter /> 
       </Slide>
 
+      <ImageWithTitle 
+        title="Rate Limit" 
+        img={ImgStop}
+        />
+
       <Slide>
-        <Title>Twitter</Title>
+        <Title>Rate Limits</Title>
+        <List>
+          <li>Limited to 900 calls per 15 minutes</li>
+          <li>Throttle your calls</li>
+          <li>Cache information</li>
+        </List>
+      </Slide>
+
+      <Slide>
+        <Title>Next Steps</Title>
         <Text>
           I now have your face and your tweets, now what?
         </Text>
@@ -130,9 +147,9 @@ t.get("followers/ids", {}, (err, data, resp) => {
         <Subtitle>Are you worthy of my time</Subtitle>
         <List>
           <li>You have to be one of my followers</li>
-          <li>Good following yourself (up to 40 pts)</li>
-          <li>You follow other people (up to 20 pts)</li>
-          <li>Your tweets are positive (up to 40 pts)</li>
+          <li>Good following yourself</li>
+          <li>You follow other people</li>
+          <li>Your tweets are positive</li>
         </List>
       </Slide>
 
@@ -350,15 +367,15 @@ score = sentiment.analyze("Something negative.");
         <Text>A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.</Text>
       </Slide>
 
-      <Slide>
+      {/* <Slide>
         <Title>Containers</Title>
         <Text>It [...] is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.</Text>
       </Slide>
 
-      {/* <Slide>
+      <Slide>
         <Title>Containers</Title>
         <Text>It is a disposable unit. Once it's completed, it destroys itself along with all other dependencies.</Text>
-      </Slide>
+      </Slide> */}
 
       <CodeSlide title="Node Containers" lang="bash">
         {`
@@ -367,12 +384,38 @@ docker run -d -v $(pwd):/app:z \\
         `}
       </CodeSlide>
 
-      <CodeSlide title="Node Containers" lang="bash">
+      <CodeSlide title="MongoDB Containers" lang="bash">
+        {`
+echo "Starting Mongo Database"
+echo "(data persisted in ./data)"
+docker run -d --rm --name mongo \\
+ -e MONGO_INITDB_ROOT_USERNAME=admin \\
+ -e MONGO_INITDB_ROOT_PASSWORD=12345 \\
+ -p 27017:27017 \\
+ -v data:/data/db \\
+ mongo:4.4
+        `}
+      </CodeSlide>
+
+      {/* <CodeSlide title="MongoDB Containers" lang="bash">
+        {`
+echo "Starting Mongo-express"
+echo " Interface available at http://localhost:8882"
+docker run -d --rm --name mongo-admin \\
+ -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \\
+ -e ME_CONFIG_MONGODB_ADMINPASSWORD=12345 \\
+ -e ME_CONFIG_MONGODB_SERVER=192.168.122.1 \\
+ -p 8882:8081 \\
+ mongo-express:0.54
+        `}
+      </CodeSlide> */}
+
+      {/* <CodeSlide title="Node Containers" lang="bash">
         {`
 docker run -d -v $(pwd):/app:z \\
     -p 3000:3000 node:12 node /app
         `}
-      </CodeSlide>
+      </CodeSlide> */}
 
       <CodeSlide title="Node Containers" lang="bash">
         {`
@@ -393,11 +436,72 @@ CMD node .
 
       <CodeSlide title="Node Containers" lang="bash">
         {`
-docker built -t joellord/node-ml-k8s-facedetection .
+docker build -t joellord/node-ml-k8s-facedetection .
 
 docker push docker.io/joellord/node-ml-k8s-facedetection
         `}
-      </CodeSlide> */}
+      </CodeSlide>
+
+      <ImageWithTitle title="Storage" img={ImgStorage} />
+
+      <Slide>
+        <Title>Storage</Title>
+        <List>
+          <li>Flexible</li>
+          <li>JSON-friendly</li>
+        </List>
+      </Slide>
+
+      <CodeSlide title="Data Schema">
+        {`
+import mongoose from "mongoose";
+
+const FollowerSchema = {
+  id: String,
+  handle: String,
+  ...
+  sentiment: {
+    averageComparative: Number
+  },
+  faceDescriptors: Array
+}
+
+const Follower = mongoose.model("Follower", FollowerSchema);
+        `}
+      </CodeSlide>
+
+      {/* <CodeSlide title="Data Schema">
+        {`
+import mongoose from "mongoose";
+await mongoose.connect(process.env.MONGO_URI, {});
+
+// Get document
+let follower = await Follower.findOne(filter).exec();
+
+// Insert/Update document
+let newFollower = await Follower.findOneAndUpdate(
+  filter, 
+  update, 
+  { new: true, upsert: true });
+
+// Add information then save
+existingFollower.faceDescriptors.push(data.descriptors);
+let newFollower = await existingFollower.save({ new: true });
+        `}
+      </CodeSlide>
+
+      <Slide>
+        <Title>Mongoose vs Mongo</Title>
+        <Text>
+          Mongoose is a node module to help you enforce schemas. There is also a Node.js drive that you can use.
+        </Text>
+      </Slide>
+
+      <Slide>
+        <Title>Mongoose vs Mongo</Title>
+        <Text>Do You Need Mongoose When Developing Node.js and MongoDB Applications?</Text>
+        <a href="#">https://developer.mongodb.com/article/mongoose-versus-nodejs-driver/</a>
+      </Slide> */}
 
       <ImageWithTitle title="Messaging" img={ImgPassNotes} />
 
@@ -419,8 +523,8 @@ docker push docker.io/joellord/node-ml-k8s-facedetection
       {/* <Slide>
         <Subtitle>Request/Reply Pattern (RPC)</Subtitle>
         <Image src={ImgMQRPC} />
-      </Slide> */}
-      
+      </Slide>
+       */}
       <CodeSlide title="Simple Pub/Sub - Publisher">
         {`
 const amqp = require('amqplib/callback_api');
@@ -575,7 +679,7 @@ amqp.connect('amqp://rabbitmq', (err, connection) => {
         `}
       </CodeSlide> */}
 
-      <ImageWithTitle img={ImgOpenShift} />
+      <ImageWithTitle img={ImgOpenShift} title="" />
 
       <ImageWithTitle img={ImgDemo} title="What About the demo?" />
 

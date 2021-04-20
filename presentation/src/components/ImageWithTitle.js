@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import Parser from "html-react-parser";
 import { Slide, Image, Title } from '@sambego/diorama';
 
 const DARK = "#333333";

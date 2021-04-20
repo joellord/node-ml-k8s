@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "express-ws": "^4.0.0",
     "face-api.js": "^0.22.2",
+    "html-react-parser": "^1.2.4",
     "node-pty": "^0.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

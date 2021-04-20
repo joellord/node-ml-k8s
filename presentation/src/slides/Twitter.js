@@ -34,7 +34,10 @@ export default class Twitter extends Component {
     this.setState({tweets});
   }
 
-  refreshFollowers() {
+  refreshFollowers(e) {
+    let btn = e.target;
+    btn.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+    setTimeout(() => btn.style.backgroundColor = "rgba(0, 0, 0, 0.1)", 500)
     let refreshUrl = `http://${window.location.hostname}${port}/refreshstream`;
     fetch(refreshUrl);
   }
@@ -62,7 +65,7 @@ export default class Twitter extends Component {
         border: "0",
         position: "absolute",
         right: "20px",
-        bottom: "50px"
+        bottom: "100px"
       }
     }
 
