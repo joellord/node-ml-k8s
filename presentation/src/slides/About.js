@@ -12,11 +12,11 @@ export default class TalkTitle extends Component {
             <Image src={Speaker} style={{width: "50vw", top: "0px"}} color="#ccc" />
           </div>
           <div>
-            <Subtitle>Hi, I'm Joel</Subtitle>
+            <Subtitle>{this.props.lang === "fr" ? "Bonjour" : "Hi, I'm Joel"}</Subtitle>
             <List className="align-left">
               <li> <span role="img" aria-label="Proud Canadian">🇨🇦</span></li>
-              <li>Developer Advocate</li>
-              <li>Red Hat OpenShift</li>
+              <li>{this.props.lang === "fr" ? "Relations Développeurs" : "Developer Advocate"}</li>
+              <li>MongoDB</li>
               <li><span role="img" aria-label="I heart">❤</span> Twitter @joel__lord</li>
             </List>
           </div>

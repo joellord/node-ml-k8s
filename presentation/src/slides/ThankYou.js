@@ -19,7 +19,7 @@ export default class ThankYou extends Component {
   render() {
     return (
       <Slide>
-        <Title>Thank You!</Title>
+        <Title>{this.props.lang === "fr" ? "Merci" : "Thank You"}</Title>
         <Text>{this.state.title}</Text>
         <Text>{this.state.conference} - {this.state.date}</Text>
         <br/>

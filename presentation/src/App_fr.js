@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { Deck, Slide, Title, Subtitle, Text, Browser, List, Link, Image, Footer } from "@sambego/diorama";
+import { Deck, Slide, Title, Subtitle, Text, Browser, List, Image, Footer } from "@sambego/diorama";
 import ImageWithTitle from "./components/ImageWithTitle";
 import CodeSlide from "./components/CodeSlide";
 import Twitter from "./slides/Twitter";
@@ -13,7 +13,7 @@ import ThankYou from "./slides/ThankYou";
 import ImgRating from "./assets/ratings.jpg";
 import ImgEvilApp from "./assets/evil-app.jpg";
 import ImgPublicData from "./assets/public-data.jpg";
-import ImgWarning from "./assets/warning.jpg";
+// import ImgWarning from "./assets/warning.jpg";
 import ImgStop from "./assets/stop.jpg";
 import ImgTabarnak from "./assets/tabarnak.gif";
 import ImgMicroservices from "./assets/microservices.jpg";
@@ -23,7 +23,7 @@ import ImgMindBlown from "./assets/mindblown.gif";
 import ImgPassNotes from "./assets/passnotes.jpg";
 import ImgMQSimple from "./assets/mq-simple.png";
 import ImgMQWork from "./assets/mq-work-queue.png";
-import ImgMQRPC from "./assets/mq-rpc.png";
+// import ImgMQRPC from "./assets/mq-rpc.png";
 import ImgStorage from "./assets/storage.jpg";
 import ImgMaestro from "./assets/maestro.jpg";
 import ImgOpenShift from "./assets/openshift.png";
@@ -33,10 +33,10 @@ import ImgUnethical from "./assets/unethical.jpg";
 const SHOW_NOTES = true;
 
 const talkProps = {
-  title: "NodeJS, ML, K8s and Unethical Facial Recognition",
-  conference: "OpenJS World",
-  conferenceHashTag: "#OpenJSWorld21",
-  date: "June 2, 2021",
+  title: "NodeJS, IA, K8s et Reconnaissance Faciale Non-Éthique",
+  conference: "Web à Québec",
+  conferenceHashTag: "#WAQ",
+  date: "15 juin 2021",
   moreInfoUrl: "http://ezurl.to/unethical"
 }
 
@@ -47,33 +47,33 @@ function App() {
     <Deck swipeToChange={false} footer={footer} presenterNotes={SHOW_NOTES}>
 
       <ImageWithTitle 
-        title="NodeJS, ML, K8s and Unethical Face Recognition" 
+        title="NodeJS, IA, K8s et Reconnaissance Faciale Non-Éthique" 
         img={ ImgRating } 
         notes="."
         />
 
-      <About />
+      <About lang="fr"/>
 
-      <ImageWithTitle title="The App" img={ ImgEvilApp } />
+      <ImageWithTitle title="L'appli" img={ ImgEvilApp } />
 
       <Slide>
-        <Title>The App</Title>
+        <Title>L'appli</Title>
         <List>
-          <li>Find public data sources</li>
-          <li>Detect faces and score</li>
-          <li>Deploy all the things</li>
+          <li>Trouver des données publiques</li>
+          <li>Détecter les visages et scorer</li>
+          <li>Deployer le tout</li>
         </List>
       </Slide>
 
-      <ImageWithTitle title="Public Data Sources" img={ ImgPublicData } />
+      <ImageWithTitle title="Données Publiques" img={ ImgPublicData } />
 
       <Slide>
         <Subtitle>Twitter!</Subtitle>
         <Text>
-          Great source of public data. Profile pictures, sentiments, followers, and so on.
+          Une excellent source de données publiques. Images de profil, sentiments, suivants, et plus encore.
         </Text>
         <Text>
-          More importantly, they have an API.
+          Encore mieux, ils ont un API.
         </Text>
       </Slide>
 
@@ -119,57 +119,55 @@ t.get("followers/ids", {}, (err, data, resp) => {
       </Slide>
 
       <ImageWithTitle 
-        title="Rate Limit" 
+        title="Limites" 
         img={ImgStop}
         />
 
       <Slide>
-        <Title>Rate Limits</Title>
+        <Title>Limites</Title>
         <List>
-          <li>Limited to 900 calls per 15 minutes</li>
-          <li>Throttle your calls</li>
-          <li>Cache information</li>
+          <li>Limité à 900 requêtes par 15 minutes</li>
+          <li>Gérer la vitesse des requêtes</li>
+          <li>Cache d'information</li>
         </List>
       </Slide>
 
       <Slide>
-        <Title>Next Steps</Title>
+        <Title>Prochaines étapes</Title>
         <Text>
-          I now have your face and your tweets, now what?
+          J'ai votre visage et vos tweets, que faire maintenant?
         </Text>
       </Slide>
 
       <Slide>
-        <Title>Time to rate you</Title>
+        <Title>Évaluation</Title>
       </Slide>
 
       <Slide>
-        <Subtitle>Are you worthy of my time</Subtitle>
+        <Subtitle>Êtes-vous dignes de mon temps</Subtitle>
         <List>
-          <li>You have to be one of my followers</li>
-          <li>Good following yourself</li>
-          <li>You follow other people</li>
-          <li>Your tweets are positive</li>
+          <li>Vous devez me suivre sur Twitter</li>
+          <li>Vous devez avoir un bon nombre de suivants</li>
+          <li>Vous devez suivre d'autres personnes</li>
+          <li>Vos gazouillis sont positifs</li>
         </List>
       </Slide>
 
-      <ImageWithTitle title="Machine Learning" img={ ImgMachineLearning } />
+      <ImageWithTitle title="Apprentissage Automatisé" img={ ImgMachineLearning } />
 
       <Slide>
-        <Title>Machine Learning</Title>
-        <Text>Machine learning (ML) is the study of computer algorithms that improve automatically through experience.</Text>
-        <Text>It is seen as a subset of artificial intelligence. </Text>
-        <Text>Machine learning algorithms build a mathematical model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to do so.</Text>
+        <Title>Apprentissage Automatisé</Title>
+        <Text>L'apprentissage automatique (en anglais : machine learning), est un champ d'étude de l'intelligence artificielle qui se fonde sur des approches mathématiques et statistiques pour donner aux ordinateurs la capacité d'« apprendre » à partir de données, c'est-à-dire d'améliorer leurs performances à résoudre des tâches sans être explicitement programmés pour chacune.</Text>
       </Slide>
 
       <ImageWithTitle title="Tensorflow" img={ ImgTabarnak } />
 
       <Slide>
-        <Title>Machine Learning</Title>
+        <Title>Apprentissage Automatisé</Title>
         <List>
-          <li>Training a model is hard, complex and costly</li>
-          <li>Many cloud providers can offer some tooling</li>
-          <li>Pre-trained models are available</li>
+          <li>Créer un modèle est difficile, complexe et coûteux</li>
+          <li>Il existe plusieurs solutions infonuagiques</li>
+          <li>Des modèles pré-entraînés existent</li>
         </List>
       </Slide>
 
@@ -178,11 +176,11 @@ t.get("followers/ids", {}, (err, data, resp) => {
         <Text>https://github.com/justadudewhohacks/face-api.js/</Text>
       </Slide>
 
-      <Detection title={"Face Detection"} />
+      <Detection title={"Détection Faciale"} />
 
-      <Detection showLandmarks={true} title={"Face Landmarks"} />
+      <Detection showLandmarks={true} title={"Repères faciaux"} />
 
-      <Detection showExpressions={true} title={"Face Expressions"} />
+      <Detection showExpressions={true} title={"Expressions faciales"} />
 
       <CodeSlide title="face-api.js">
         {`
@@ -231,7 +229,7 @@ faceapi.draw.drawFaceLandmarks(canvas, fullFaceDescriptions);
         `}
       </CodeSlide>
 
-      <CodeSlide title="face-api.js on NodeJS">
+      <CodeSlide title="face-api.js avec NodeJS">
         {`
 const { Canvas, Image, ImageData, loadImage } = nodeCanvas;
 const canvas = new Canvas(WIDTH, HEIGHT);
@@ -251,12 +249,12 @@ let fullFaceDescriptions = await faceapi
       </CodeSlide> */}
 
       <Slide>
-        <Title>What about recognition?</Title>
+        <Title>Et la reconnaissance dans tout ça?</Title>
       </Slide>
 
       <Recognition />
 
-      <CodeSlide title="Face Recognition">
+      <CodeSlide title="Reconnaissance faciale">
         {`
 const labeledFaceDescriptors = await Promise.all(
   labels.map(async label => {
@@ -274,7 +272,7 @@ const labeledFaceDescriptors = await Promise.all(
         `}
       </CodeSlide>
 
-      <CodeSlide title="Face Recognition">
+      <CodeSlide title="Reconnaissance faciale">
         {`
 const maxDescriptorDistance = 0.6
 const faceMatcher = new faceapi.FaceMatcher(
@@ -295,36 +293,36 @@ const results = fullFaceDescriptions.map(fd =>
       <Slide>
         <Title>face-api.js</Title>
         <List>
-          <li>Face recognition with a single reference point</li>
-          <li>Assumes your Twitter profile is an actual picture</li>
-          <li>Doesn't work if you wear a mask (which you should!)</li>
+          <li>Reconnaissance faciale avec un seul référant</li>
+          <li>Suppose que votre image de profil en est une réelle</li>
+          <li>Ne fonctionne pas si vous portez un masque (vous devriez!)</li>
         </List>
       </Slide>
 
       <ImageWithTitle img={ImgMindBlown} />
 
       <Slide>
-        <Title>Moar Machine Learning</Title>
-        <Subtitle>Sentiment Analysis</Subtitle>
+        <Title>Plus d'IA!</Title>
+        <Subtitle>Analyse de sentiments</Subtitle>
       </Slide>
 
       <Slide>
-        <Title>Sentiment Analysis</Title>
+        <Title>Analyse de sentiments</Title>
         <Text>
-          Sentiment Analysis is the process of determining whether a piece of writing is positive, negative or neutral.
+          L'analyse de sentiments est un processus qui sert à déterminer si un extrait textuel est positif, négatif ou neutre.
         </Text>
         <Text>
-          Sentiment analysis helps data analysts within large enterprises gauge public opinion, conduct nuanced market research, monitor brand and product reputation, and understand customer experiences.
+          L'analyse de sentiments aide les analystes de données à jauger l'opinion publique, conduire des recherches de marché, surveiller une image de marque et comprendre l'expérience des clients.
         </Text>
       </Slide>
       
-      <CodeSlide title="Sentiment Analysis">
+      <CodeSlide title="Analyse de sentiments">
         {`
 const Sentiment = require("sentiment");
 const sentiment = new Sentiment();
 
-score = sentiment.analyze("This is positive!");
-score = sentiment.analyze("Something negative.");
+score = sentiment.analyze("Ce texte est positif!");
+score = sentiment.analyze("Texte négatif.");
         `}
       </CodeSlide>
 
@@ -333,22 +331,22 @@ score = sentiment.analyze("Something negative.");
       </Slide>
 
       <Slide>
-        <Subtitle>What we have so far</Subtitle>
+        <Subtitle>Jusqu'à maintenant</Subtitle>
         <List>
-          <li>Public data</li>
-          <li>Faces</li>
-          <li>Tweets</li>
+          <li>Données Publiques</li>
+          <li>Visages</li>
+          <li>Gazouillis</li>
         </List>
       </Slide>
 
-      <ImageWithTitle title="Connecting Everything Together" img={ImgConnecting} />
+      <ImageWithTitle title="Connecter le tout" img={ImgConnecting} />
 
       <Slide>
-        <Title>Connecting everything together</Title>
+        <Title>Connecter le tout</Title>
         <List>
           <li>Microservices (NodeJS Containers)</li>
           <li>Messaging Queue (Rabbit MQ)</li>
-          <li>Database (MongoDB)</li>
+          <li>Base de données (MongoDB)</li>
           <li>Kubernetes (OpenShift)</li>
         </List>
       </Slide>
@@ -357,34 +355,34 @@ score = sentiment.analyze("Something negative.");
         <Image src={ ImgMicroservices } />
       </Slide>
 
-      <Slide>
+      {/* <Slide>
         <Subtitle>Containerization For Software Developers</Subtitle>
-        <Text>Learn everything you need to know about Containers</Text>
-      </Slide>
+        <Text>Tout ce que vous devez savoir sur les containers</Text>
+      </Slide> */}
 
       <Slide>
-        <Title>Containers</Title>
-        <Text>A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.</Text>
+        <Title>Containers (Conteneurs? Contenants?)</Title>
+        <Text>Les conteneurs vous permettent d'assembler et d'isoler des applications avec leur environnement d'exécution complet contenant tous les fichiers nécessaires à leur exécution. Les applications conteneurisées sont plus faciles à déplacer d'un environnement à un autre, tout en conservant l'intégralité de leurs fonctions.</Text>
       </Slide>
 
       {/* <Slide>
         <Title>Containers</Title>
         <Text>It [...] is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.</Text>
-      </Slide> */}
+      </Slide>
 
       <Slide>
         <Title>Containers</Title>
         <Text>It is a disposable unit. Once it's completed, it destroys itself along with all other dependencies.</Text>
-      </Slide>
+      </Slide> */}
 
-      <CodeSlide title="Node Containers" lang="bash">
+      <CodeSlide title="Conteneur Node.js" lang="bash">
         {`
 docker run -d -v $(pwd):/app:z \\
     -p 3000:3000 node:14 node /app
         `}
       </CodeSlide>
 
-      <CodeSlide title="MongoDB Containers" lang="bash">
+      <CodeSlide title="Conteneur MongoDB" lang="bash">
         {`
 echo "Starting Mongo Database"
 echo "(data persisted in ./data)"
@@ -397,7 +395,7 @@ docker run -d --rm --name mongo \\
         `}
       </CodeSlide>
 
-      <CodeSlide title="MongoDB Containers" lang="bash">
+      <CodeSlide title="Conteneur MongoDB" lang="bash">
         {`
 echo "Starting Mongo-express"
 echo " Interface available at http://localhost:8882"
@@ -415,15 +413,15 @@ docker run -d --rm --name mongo-admin \\
 docker run -d -v $(pwd):/app:z \\
     -p 3000:3000 node:12 node /app
         `}
-      </CodeSlide> */}
+      </CodeSlide>
 
       <CodeSlide title="Node Containers" lang="bash">
         {`
 docker run -d -p 3000:3000 <myimage>
         `}
-      </CodeSlide>
+      </CodeSlide> */}
 
-      <CodeSlide title="Node Containers">
+      <CodeSlide title="Conteneur Node.js">
         {`
 FROM node:14
 EXPOSE 3000
@@ -434,7 +432,7 @@ CMD node .
         `}
       </CodeSlide>
 
-      <CodeSlide title="Node Containers" lang="bash">
+      <CodeSlide title="Conteneur Node.js" lang="bash">
         {`
 docker build -t joellord/node-ml-k8s-facedetection .
 
@@ -442,17 +440,17 @@ docker push docker.io/joellord/node-ml-k8s-facedetection
         `}
       </CodeSlide>
 
-      <ImageWithTitle title="Storage" img={ImgStorage} />
+      <ImageWithTitle title="Stockage" img={ImgStorage} />
 
       <Slide>
-        <Title>Storage</Title>
+        <Title>Données</Title>
         <List>
           <li>Flexible</li>
-          <li>JSON-friendly</li>
+          <li>JSON-sympathique</li>
         </List>
       </Slide>
 
-      <CodeSlide title="Data Schema">
+      <CodeSlide title="Schema de données">
         {`
 import mongoose from "mongoose";
 
@@ -470,7 +468,7 @@ const Follower = mongoose.model("Follower", FollowerSchema);
         `}
       </CodeSlide>
 
-      <CodeSlide title="Data Schema">
+      {/* <CodeSlide title="Data Schema">
         {`
 import mongoose from "mongoose";
 await mongoose.connect(process.env.MONGO_URI, {});
@@ -490,7 +488,7 @@ let newFollower = await existingFollower.save({ new: true });
         `}
       </CodeSlide>
 
-      {/* <Slide>
+      <Slide>
         <Title>Mongoose vs Mongo</Title>
         <Text>
           Mongoose is a node module to help you enforce schemas. There is also a Node.js drive that you can use.
@@ -503,20 +501,21 @@ let newFollower = await existingFollower.save({ new: true });
         <a href="#">https://developer.mongodb.com/article/mongoose-versus-nodejs-driver/</a>
       </Slide> */}
 
-      <ImageWithTitle title="Messaging" img={ImgPassNotes} />
+      <ImageWithTitle title="Messagerie" img={ImgPassNotes} />
 
       <Slide>
-        <Title>Messaging Queue</Title>
-        <Text>A message queue is a form of asynchronous service-to-service communication used in serverless and microservices architectures. Messages are stored on the queue until they are processed and deleted. Each message is processed only once, by a single consumer. Message queues can be used to decouple heavyweight processing, to buffer or batch work, and to smooth spiky workloads.</Text>
+        <Title>Système de Messagerie</Title>
+        <Subtitle>(Messaging Queues)</Subtitle>
+        <Text>Une file d'attente de messages est une forme de communication service-à-service asynchrone utilisée dans les architectures sans serveur et de micro-services. Les messages sont stockés dans la file d'attente jusqu'à ce qu'ils soient traités et supprimés. Chaque message n'est traité qu'une fois pour un seul utilisateur. Les files d'attente de message peuvent être utilisées pour découpler le traitement lourd, mettre en mémoire tampon ou traiter en lot, et fluidifier les pics de charges de travail.</Text>
       </Slide>
 
       <Slide>
-        <Subtitle>Simple Message Queue</Subtitle>
+        <Subtitle>Système de Messagerie Simple</Subtitle>
         <Image src={ImgMQSimple} />
       </Slide>
 
       <Slide>
-        <Subtitle>Competing Consumers</Subtitle>
+        <Subtitle>Consommateurs Compétitifs</Subtitle>
         <Image src={ImgMQWork} />
       </Slide>
 
@@ -565,27 +564,27 @@ amqp.connect('amqp://localhost', function(err, connection) {
 
       <Slide>
         <Subtitle>RabbitMQ</Subtitle>
-        <Text><a href="https://www.rabbitmq.com/getstarted.html">https://www.rabbitmq.com/getstarted.html</a></Text>
+        <a href="https://www.rabbitmq.com/getstarted.html">https://www.rabbitmq.com/getstarted.html</a>
       </Slide>
 
-      <ImageWithTitle title="Deploy All The Things" img={ImgMaestro} />
+      <ImageWithTitle title="Déploiement" img={ImgMaestro} />
 
-      <Slide>
+      {/* <Slide>
         <Subtitle>Kubernetes Kitchen</Subtitle>
         <Text>Learn everything you need to know about Kubernetes</Text>
-      </Slide>
+      </Slide> */}
 
       <Slide>
         <Title>Kubernetes</Title>
-        <Text>Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</Text>
+        <Text>Kubernetes est une plate-forme open-source extensible et portable pour la gestion de charges de travail (workloads) et de services conteneurisés.</Text>
       </Slide>
 
       <Slide>
         <Title>Kubernetes</Title>
         <List>
-          <li>Orchestrator for containers. </li>
-          <li>Spin up more or less containers as needed</li>
-          <li>Takes care of the networking</li>
+          <li>Gère les conteneurs. </li>
+          <li>Ajoute ou enlève des conteneurs</li>
+          <li>S'occupe de la réseautique</li>
         </List>
       </Slide>
 
@@ -598,7 +597,7 @@ amqp.connect('amqp://localhost', function(err, connection) {
         </List>
       </Slide>
       
-      {/* <CodeSlide title="Kubernetes Deployment" lang="yaml">
+      <CodeSlide title="Kubernetes Deployment" lang="yaml">
         {`
 apiVersion: apps/v1
 kind: Deployment
@@ -677,16 +676,16 @@ amqp.connect('amqp://rabbitmq', (err, connection) => {
   // ...
 });            
         `}
-      </CodeSlide> */}
+      </CodeSlide>
 
       <ImageWithTitle img={ImgOpenShift} title="" />
 
-      <ImageWithTitle img={ImgDemo} title="What About the demo?" />
+      <ImageWithTitle img={ImgDemo} title="On veut une demo!" />
 
-      <ImageWithTitle img={ImgUnethical} title="A Quick Note About Unethical Machine Learning" />
+      <ImageWithTitle img={ImgUnethical} title="Apprentissage automatisé et éthique" />
 
       <Slide>
-        <Title>Links</Title>
+        <Title>Liens</Title>
         <List>
           <li>Containerization for Software Developers</li>
           <li>Kubernetes Kitchen</li>
@@ -696,6 +695,7 @@ amqp.connect('amqp://rabbitmq', (err, connection) => {
       </Slide>
 
       <ThankYou 
+        lang="fr"
         title={talkProps.title}
         conference={talkProps.conference}
         date={talkProps.date}
