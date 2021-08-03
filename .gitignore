@@ -7,7 +7,4 @@ demo/**/*.jpeg
 demo/**/*.JPG
 demo/**/*.gif
 training.txt
-Dockerfile
-Containerfile
-
 .env
